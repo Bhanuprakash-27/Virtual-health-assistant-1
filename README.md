@@ -5,27 +5,6 @@
 
 This is a Virtual Health Assistant system built for an AI and Full Stack Developer assessment. The application provides AI powered health information assistance while maintaining strict safety protocols. The system never provides medical diagnoses and always recommends consulting healthcare professionals.
 
--->Project Structure
-
-virtual-health-assistant/
-├── backend/
-│   ├── app.py
-│   ├── requirements.txt
-│   ├── api/
-│   ├── nlp/
-│   └── utils/
-├── frontend/
-│   ├── index.html
-│   ├── chat.html
-│   ├── summarizer.html
-│   ├── css/
-│   └── js/
-├── knowledge_base/
-│   ├── symptoms.json
-│   ├── emergencies.json
-│   └── medications.json
-└── README.md
-
 -->Key Features
 
 -->AI Chatbot Backend
