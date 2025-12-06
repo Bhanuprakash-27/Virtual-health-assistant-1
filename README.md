@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Virtual Health Assistant
 
 An AI-powered virtual health assistant that helps patients by answering symptom-related queries, summarizing medical records, and providing health information with safety guardrails.
@@ -68,3 +69,6 @@ cd backend
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+=======
+# Virtual-health-assistant-1
+>>>>>>> e87b3271efb55355fa2d07313dce0ebf92943009
