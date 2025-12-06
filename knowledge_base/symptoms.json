@@ -1,0 +1,19 @@
+{
+  "headache": {
+    "description": "Pain or discomfort in the head or face area",
+    "common_causes": ["Stress", "Tension", "Dehydration", "Eye strain", "Sinusitis"],
+    "severity_indicators": ["Severe pain", "Sudden onset", "With fever", "With confusion"],
+    "when_to_see_doctor": "If severe, sudden, or with other symptoms like fever",
+    "self_care_tips": ["Rest in quiet room", "Apply cold compress", "Stay hydrated", "Manage stress"],
+    "is_emergency": false
+  },
+  "chest_pain": {
+    "description": "Pain or discomfort in the chest area",
+    "common_causes": ["Heartburn", "Muscle strain", "Anxiety", "Respiratory issues"],
+    "severity_indicators": ["Crushing pain", "Radiating to arm/jaw", "With sweating", "Shortness of breath"],
+    "when_to_see_doctor": "Immediately for any chest pain",
+    "self_care_tips": ["Sit still and rest", "Loosen tight clothing", "Remain calm"],
+    "is_emergency": true,
+    "emergency_action": "Call emergency services immediately"
+  }
+}

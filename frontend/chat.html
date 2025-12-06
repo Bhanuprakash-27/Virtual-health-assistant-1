@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Assistant - Virtual Health Assistant</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 80vh;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        .chat-header {
+            background: linear-gradient(135deg, #1e88e5, #1565c0);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .chat-header h2 {
+            margin: 0;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #fafafa;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            max-width: 80%;
+        }
+        
+        .user-message {
+            margin-left: auto;
+            background: #e3f2fd;
+            padding: 12px 18px;
+            border-radius: 18px 18px 0 18px;
+        }
+        
+        .assistant-message {
+            background: white;
+            padding: 12px 18px;
+            border-radius: 18px 18px 18px 0;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .emergency-message {
+            background: linear-gradient(135deg, #ff5252, #d32f2f);
+            color: white;
+            border: none;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(211, 47, 47, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(211, 47, 47, 0); }
+        }
+        
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        
+        .chat-input-container {
+            padding: 20px;
+            border-top: 1px solid #e0e0e0;
+            background: white;
+        }
+        
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chat-input textarea {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            resize: none;
+            height: 50px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        .chat-input button {
+            padding: 0 30px;
+        }
+        
+        .quick-replies {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .quick-reply {
+            background: #e3f2fd;
+            border: 1px solid #bbdefb;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .quick-reply:hover {
+            background: #bbdefb;
+            transform: translateY(-2px);
+        }
+        
+        .typing-indicator {
+            display: flex;
+            gap: 5px;
+            padding: 10px;
+        }
+        
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #1e88e5;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+        
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+        
+        .back-button {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .back-button:hover {
+            background: rgba(255,255,255,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-comment-medical"></i>
+                <h1>Health Chat Assistant</h1>
+            </div>
+            <a href="index.html" class="back-button">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </header>
+
+        <!-- Emergency Warning -->
+        <div class="emergency-alert" style="margin-bottom: 20px;">
+            <i class="fas fa-ambulance"></i>
+            <div>
+                <h3>EMERGENCY WARNING</h3>
+                <p>If you have chest pain, difficulty breathing, severe bleeding, or thoughts of harming yourself, stop using this chat and call emergency services <strong>IMMEDIATELY</strong>.</p>
+                <p class="emergency-number">Call 911 (US) / 112 (EU) / 108 (India)</p>
+            </div>
+        </div>
+
+        <!-- Chat Container -->
+        <div class="chat-container">
+            <div class="chat-header">
+                <i class="fas fa-robot"></i>
+                <h2>How can I help you today?</h2>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <!-- Messages will be added here -->
+                <div class="message assistant-message">
+                    <div class="message-header">
+                        <span>Health Assistant</span>
+                        <span>Just now</span>
+                    </div>
+                    <p>Hello! I'm your Virtual Health Assistant. I can provide general information about symptoms, medications, and health topics. Please describe how you're feeling or ask a health question.</p>
+                    <p><strong>Remember:</strong> I don't provide diagnoses. Always consult with healthcare professionals for medical advice.</p>
+                </div>
+            </div>
+            
+            <div class="chat-input-container">
+                <div class="quick-replies">
+                    <div class="quick-reply" onclick="sendQuickReply('I have a headache')">Headache</div>
+                    <div class="quick-reply" onclick="sendQuickReply('I have fever and cough')">Fever & Cough</div>
+                    <div class="quick-reply" onclick="sendQuickReply('I feel nauseous')">Nausea</div>
+                    <div class="quick-reply" onclick="sendQuickReply('I have chest pain')">Chest Pain</div>
+                    <div class="quick-reply" onclick="sendQuickReply('What is paracetamol used for?')">Medication Info</div>
+                </div>
+                
+                <div class="chat-input">
+                    <textarea id="messageInput" placeholder="Describe your symptoms or ask a health question..." onkeydown="checkEnter(event)"></textarea>
+                    <button class="btn" onclick="sendMessage()">
+                        <i class="fas fa-paper-plane"></i> Send
+                    </button>
+                </div>
+                
+                <div style="margin-top: 15px; font-size: 0.8rem; color: #666; text-align: center;">
+                    <i class="fas fa-exclamation-circle"></i> This chat is for educational purposes only. Not a substitute for medical advice.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/chat.js"></script>
+</body>
+</html>

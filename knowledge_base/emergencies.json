@@ -1,0 +1,12 @@
+{
+  "emergency_keywords": [
+    "chest pain", "heart attack", "stroke", "difficulty breathing",
+    "severe bleeding", "unconscious", "severe allergic reaction",
+    "suicidal thoughts", "seizure", "poisoning"
+  ],
+  "emergency_responses": {
+    "chest pain": "CALL EMERGENCY SERVICES (911/112/108) IMMEDIATELY! This could be a heart attack. Do not drive yourself.",
+    "difficulty breathing": "CALL EMERGENCY SERVICES NOW! Sit upright and try to remain calm.",
+    "stroke": "CALL EMERGENCY SERVICES! Remember FAST: Face drooping, Arm weakness, Speech difficulty, Time to call."
+  }
+}

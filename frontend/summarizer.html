@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Record Summarizer - Virtual Health Assistant</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .summarizer-container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        
+        .input-section, .output-section {
+            margin-bottom: 30px;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            resize: vertical;
+            margin-top: 10px;
+        }
+        
+        .example-text {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .example-text code {
+            color: #d32f2f;
+        }
+        
+        .summary-output {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #1e88e5;
+            min-height: 150px;
+            margin-top: 10px;
+        }
+        
+        .alert-highlight {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .summary-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+        
+        .summary-item h4 {
+            color: #1565c0;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .summary-item h4 i {
+            font-size: 1.2rem;
+        }
+        
+        .summary-content {
+            padding-left: 30px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+        }
+        
+        .back-button {
+            background: #1e88e5;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .back-button:hover {
+            background: #1565c0;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Back Button -->
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+        
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-file-medical-alt"></i>
+                <h1>Medical Record Summarizer</h1>
+            </div>
+            <div class="disclaimer-banner">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>This tool extracts information from medical text. Always verify with original records.</span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="summarizer-container">
+            <div class="input-section">
+                <h2><i class="fas fa-paste"></i> Paste Medical Records</h2>
+                <p>Paste medical records, doctor notes, or health information below. The system will extract key information.</p>
+                
+                <textarea id="medicalText" placeholder="Example: Patient has allergies to penicillin and peanuts. Current medications: metformin 500mg daily, lisinopril 10mg daily. History of hypertension and type 2 diabetes. Last visit: 2024-01-15 for routine checkup."></textarea>
+                
+                <div class="example-text">
+                    <strong>Example format:</strong><br>
+                    <code>Allergies: Penicillin, Peanuts<br>
+                    Medications: Metformin 500mg daily, Lisinopril 10mg daily<br>
+                    Conditions: Hypertension, Type 2 Diabetes<br>
+                    Surgeries: Appendectomy (2010)<br>
+                    Last Visit: January 15, 2024</code>
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn" onclick="summarizeRecords()">
+                        <i class="fas fa-file-contract"></i> Summarize Records
+                    </button>
+                    <button class="btn" style="background: #6c757d;" onclick="clearText()">
+                        <i class="fas fa-trash"></i> Clear
+                    </button>
+                    <button class="btn" style="background: #28a745;" onclick="loadExample()">
+                        <i class="fas fa-lightbulb"></i> Load Example
+                    </button>
+                </div>
+            </div>
+            
+            <div class="output-section">
+                <h2><i class="fas fa-clipboard-list"></i> Extracted Summary</h2>
+                <p>Key information extracted from your medical records:</p>
+                
+                <div id="summaryOutput" class="summary-output">
+                    <div class="loading">
+                        <i class="fas fa-clipboard"></i><br>
+                        Summary will appear here after processing
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn" onclick="exportAsText()" style="background: #17a2b8;">
+                        <i class="fas fa-download"></i> Export as Text
+                    </button>
+                    <button class="btn" onclick="printSummary()" style="background: #6f42c1;">
+                        <i class="fas fa-print"></i> Print Summary
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Information Section -->
+        <div class="safety-info">
+            <h3><i class="fas fa-info-circle"></i> How It Works</h3>
+            <ul>
+                <li><i class="fas fa-search"></i> Extracts allergies, medications, conditions, and surgeries</li>
+                <li><i class="fas fa-exclamation-triangle"></i> Highlights important medical alerts</li>
+                <li><i class="fas fa-shield-alt"></i> All data processing happens locally (no external storage)</li>
+                <li><i class="fas fa-user-md"></i> Always consult with healthcare providers for accuracy</li>
+                <li><i class="fas fa-lock"></i> For demonstration only - not HIPAA compliant</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="js/summarizer.js"></script>
+</body>
+</html>

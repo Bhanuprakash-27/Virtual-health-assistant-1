@@ -1,0 +1,8 @@
+{
+  "paracetamol": {
+    "generic_name": "Acetaminophen",
+    "uses": ["Pain relief", "Fever reduction"],
+    "side_effects": ["Nausea", "Liver damage (if overdosed)"],
+    "warnings": "Do not exceed recommended dose. Avoid alcohol."
+  }
+}

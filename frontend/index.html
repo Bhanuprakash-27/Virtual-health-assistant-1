@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Health Assistant</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <h1>Virtual Health Assistant</h1>
+            </div>
+            <div class="disclaimer-banner">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>This is an AI assistant for educational purposes only. Not a substitute for professional medical advice.</span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Features Grid -->
+            <div class="features-grid">
+                <div class="feature-card" onclick="window.location.href='chat.html'">
+                    <div class="feature-icon">
+                        <i class="fas fa-comment-medical"></i>
+                    </div>
+                    <h3>Chat Assistant</h3>
+                    <p>Describe your symptoms and get general health information</p>
+                    <button class="btn">Start Chat <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div class="feature-card" onclick="window.location.href='summarizer.html'">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-medical"></i>
+                    </div>
+                    <h3>Medical Record Summarizer</h3>
+                    <p>Paste your medical records for a concise summary</p>
+                    <button class="btn">Summarize Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div class="feature-card" onclick="openSymptomChecker()">
+                    <div class="feature-icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <h3>Symptom Checker</h3>
+                    <p>Select symptoms and check general information</p>
+                    <button class="btn">Check Symptoms <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div class="feature-card" onclick="openMedicationInfo()">
+                    <div class="feature-icon">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <h3>Medication Info</h3>
+                    <p>Get information about common medications</p>
+                    <button class="btn">Search Drugs <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Emergency Alert -->
+            <div class="emergency-section">
+                <div class="emergency-alert">
+                    <i class="fas fa-ambulance"></i>
+                    <div>
+                        <h3>EMERGENCY WARNING</h3>
+                        <p>If you have chest pain, difficulty breathing, severe bleeding, or thoughts of harming yourself, call emergency services <strong>IMMEDIATELY</strong>.</p>
+                        <p class="emergency-number">Call 911 (US) / 112 (EU) / 108 (India)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Safety Information -->
+            <div class="safety-info">
+                <h3><i class="fas fa-shield-alt"></i> Safety First</h3>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Never provides medical diagnoses</li>
+                    <li><i class="fas fa-check-circle"></i> Always recommends consulting healthcare professionals</li>
+                    <li><i class="fas fa-check-circle"></i> Detects emergency symptoms immediately</li>
+                    <li><i class="fas fa-check-circle"></i> Uses validated medical information sources</li>
+                    <li><i class="fas fa-check-circle"></i> Includes disclaimers on all responses</li>
+                </ul>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>⚠️ <strong>Important Disclaimer:</strong> This Virtual Health Assistant provides general health information for educational purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
+            <p class="footer-links">
+                <a href="#" onclick="showDisclaimer()"><i class="fas fa-file-contract"></i> Full Disclaimer</a>
+                <a href="#" onclick="showPrivacy()"><i class="fas fa-user-shield"></i> Privacy</a>
+                <a href="#" onclick="showContact()"><i class="fas fa-phone-alt"></i> Emergency Contacts</a>
+            </p>
+        </footer>
+    </div>
+
+    <!-- Symptom Checker Modal -->
+    <div id="symptomModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('symptomModal')">&times;</span>
+            <h2><i class="fas fa-stethoscope"></i> Symptom Checker</h2>
+            
+            <div class="symptom-checker">
+                <div class="symptom-selection">
+                    <h3>Select Your Symptoms:</h3>
+                    <div class="symptom-checkboxes">
+                        <label><input type="checkbox" name="symptom" value="headache"> Headache</label>
+                        <label><input type="checkbox" name="symptom" value="fever"> Fever</label>
+                        <label><input type="checkbox" name="symptom" value="cough"> Cough</label>
+                        <label><input type="checkbox" name="symptom" value="nausea"> Nausea</label>
+                        <label><input type="checkbox" name="symptom" value="fatigue"> Fatigue</label>
+                        <label><input type="checkbox" name="symptom" value="chest_pain"> Chest Pain</label>
+                        <label><input type="checkbox" name="symptom" value="dizziness"> Dizziness</label>
+                    </div>
+                    
+                    <div class="severity-selector">
+                        <h3>Severity:</h3>
+                        <select id="severitySelect">
+                            <option value="mild">Mild</option>
+                            <option value="moderate">Moderate</option>
+                            <option value="severe">Severe</option>
+                        </select>
+                    </div>
+                    
+                    <button class="btn analyze-btn" onclick="analyzeSymptoms()">
+                        <i class="fas fa-search"></i> Analyze Symptoms
+                    </button>
+                </div>
+                
+                <div id="symptomResult" class="result-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Medication Info Modal -->
+    <div id="medicationModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('medicationModal')">&times;</span>
+            <h2><i class="fas fa-pills"></i> Medication Information</h2>
+            
+            <div class="medication-search">
+                <input type="text" id="drugSearch" placeholder="Enter medication name (e.g., paracetamol)">
+                <button class="btn search-btn" onclick="searchDrug()">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </div>
+            
+            <div id="medicationResult" class="result-container"></div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
