@@ -42,15 +42,15 @@ Python 3.8 or higher
 pip package manager
 Modern web browser
 Code editor (VS Code recommended)
-Python Dependencies
 
+-->Python Dependencies
 Flask web framework
 NLTK for natural language processing
 spaCy for advanced text processing
 Flask CORS for cross origin requests
 python dotenv for environment management
-Setup Instructions
 
+-->Setup Instructions
 Step 1: Clone the Repository
 
 Open terminal and run:
@@ -86,8 +86,7 @@ Step 6: Access the Application
 Open your web browser and go to:
 http://localhost:5000
 
-Project Structure
-
+-->Project Structure
 Virtual health assistant 1
 app.py - Main Flask application
 requirements.txt - Python dependencies
@@ -114,66 +113,68 @@ ai_processor.py - AI and NLP processing
 safety_checker.py - Safety validation system
 response_generator.py - Response formatting
 
-How to Use
+-->How to Use
 
-Using the Chat Assistant
-
+->Using the Chat Assistant
 Type your health question in the chat box
 Click send or press Enter
 Receive AI generated response with safety disclaimer
-Symptom Checker
 
+->Symptom Checker
 Select symptoms from the checklist
 Choose severity level
 Click Analyze Symptoms
 View recommendations and safety information
-Medical Record Summarizer
 
+->Medical Record Summarizer
 Paste medical record text in the text area
 Click Summarize Record
 View structured summary of key information
-Medication Lookup
 
+->Medication Lookup
 Enter medication name in search box
 Click Search
 View medication information and warnings
-Safety Information
 
-What This System Does
+-->Safety Information
+
+->What This System Does
 
 Provides general health information
 Explains symptoms in simple terms
 Suggests when to see a doctor
 Detects emergency situations
 Summarizes medical records
-What This System Does Not Do
 
+->What This System Does Not Do
 Does not provide medical diagnoses
 Does not recommend specific treatments
 Does not guarantee health outcomes
 Does not replace professional medical advice
-Emergency Response
 
+-->Emergency Response
 If the system detects emergency symptoms like chest pain or difficulty breathing, it will immediately show a red emergency alert banner with instructions to call 911.
 
-Testing the Application
+-->Testing the Application
 
-Test Cases
+->Test Cases
 
 Normal symptom query: I have a mild headache
 Emergency detection: Severe chest pain
 Medical record summarization: Paste sample medical text
 Diagnosis request: What disease do I have
-Safety Checklist
 
+
+->Safety Checklist
 System never provides diagnosis
 Disclaimer appears in all responses
 Emergency keywords trigger immediate action
 Severe symptoms recommend doctor consultation
 No harmful medical advice given
-Troubleshooting
 
-Common Issues
+-->Troubleshooting
+
+->Common Issues
 
 Module not found error
 Run: pip install -r requirements.txt
@@ -183,14 +184,15 @@ spaCy model not found
 Run: python -m spacy download en_core_web_sm
 CORS errors
 Ensure Flask CORS is installed and configured
-Debug Mode
+
+-->Debug Mode
 
 To enable debug mode, set DEBUG=True in .env file
 
-Contact
+->Contact
 
 For questions or issues with this project, please contact through the repository.
 
-Important Disclaimer
+-->Important Disclaimer
 
 This Virtual Health Assistant is for educational and informational purposes only. It is NOT a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition. Never disregard professional medical advice or delay seeking it because of something you have read on this system.
